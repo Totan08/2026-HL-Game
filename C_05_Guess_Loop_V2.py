@@ -81,6 +81,7 @@ while guess != secret and guesses_used < guesses_allowed:
     else:
         already_guessed.append(guess)
 
+
     # add one to the number of guesses used
     guesses_used += 1
 
@@ -90,3 +91,29 @@ while guess != secret and guesses_used < guesses_allowed:
     if guess < secret and guesses_used < guesses_allowed:
         feedback = (f"Too low, please try a higher number"
                     f"You've used {guesses_used} / {guesses_allowed} guesses ")
+    elif guess > secret and guesses_used < guesses_allowed:
+            feedback = (f"Too high, please try a lower number"
+                        f"You've used {guesses_used} / {guesses_allowed} guesses ")
+
+    # when the secret number is guessed, we have three different feedback
+    # options (lucky / 'phew' / well done)
+    elif guess == secret:
+
+        if guesses_used == 1:
+            feedback = "🍀🍀 Lucky! You got it on the first guess. 🍀🍀"
+        elif guesses_used == guesses_allowed:
+            feedback = f"phew! You got it in {guesses_used} guesses."
+        else:
+            feedback = f"well done! You guesses the secret number in {guesses_used} guesses"
+
+    # if there are no guesses left!
+    else:
+        feedback = "Sorry - you have no more guesses. You lose this round!"
+
+    # print feedback to user
+    print(feedback)
+
+    # Additional Feedback (warn user that they are running out of guesses)
+    if guesses_used == guesses_allowed - 1:
+        print("\n💣💣💣 Careful - You have one guess left! 💣💣💣\n")
+
